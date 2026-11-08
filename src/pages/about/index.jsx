@@ -21,7 +21,7 @@ export const About = () => {
         </Helmet>
         <Row className="mb-5 mt-3 pt-md-3">
           <Col lg="8">
-            <h1 className="display-4 mb-4">About me</h1>
+            <h1 className="display-4 mb-4">About Me</h1>
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
@@ -37,7 +37,7 @@ export const About = () => {
         </Row>
         <Row className=" sec_sp">
           <Col lg="5">
-            <h3 className="color_sec py-4">Work Timline</h3>
+            <h3 className="color_sec py-4">Academic & Project Experience</h3>
           </Col>
           <Col lg="7">
             <table className="table caption-top">
@@ -46,8 +46,11 @@ export const About = () => {
                   return (
                     <tr key={i}>
                       <th scope="row">{data.jobtitle}</th>
-                      <td>{data.where}</td>
-                      <td>{data.date}</td>
+                      <td>
+                        <div><strong>{data.where}</strong></div>
+                        <div>{data.date}</div>
+                        <div className="mt-2">{data.description}</div>
+                      </td>
                     </tr>
                   );
                 })}
@@ -60,19 +63,17 @@ export const About = () => {
             <h3 className="color_sec py-4">Skills</h3>
           </Col>
           <Col lg="7">
-            {skills.map((data, i) => {
+            {skills.map((skillGroup, i) => {
               return (
-                <div key={i}>
-                  <h3 className="progress-title">{data.name}</h3>
-                  <div className="progress">
-                    <div
-                      className="progress-bar"
-                      style={{
-                        width: `${data.value}%`,
-                      }}
-                    >
-                      <div className="progress-value">{data.value}%</div>
-                    </div>
+                <div key={i} className="skill-group mb-4">
+                  <h4 className="skill-category-title">{skillGroup.category}</h4>
+                  <div className="skill-tag-list">
+                    {skillGroup.items.map((skill, index) => (
+                      <div key={index} className="skill-item">
+                        <span className="skill-name">{skill.name}</span>
+                        <span className="skill-level">{skill.level}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               );
@@ -81,7 +82,7 @@ export const About = () => {
         </Row>
         <Row className="sec_sp">
           <Col lang="5">
-            <h3 className="color_sec py-4">services</h3>
+            <h3 className="color_sec py-4">Technical Skills & Areas of Interest</h3>
           </Col>
           <Col lg="7">
             {services.map((data, i) => {

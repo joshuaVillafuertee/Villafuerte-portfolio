@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import {
   FaGithub,
-  FaTwitter,
   FaFacebookF,
   FaLinkedin,
   FaYoutube,
@@ -22,7 +21,6 @@ const ICON_MAPPING = {
   linkedin: FaLinkedin,
   snapchat: FaSnapchatGhost,
   tiktok: FaTiktok,
-  twitter: FaTwitter,
   twitch: FaTwitch,
   youtube: FaYoutube
 };
@@ -35,14 +33,13 @@ export const Socialicons = () => {
           const IconComponent = ICON_MAPPING[platform] || ICON_MAPPING.default;
           return (
             <li key={platform}>
-              <a href={url}>
+              <a href={url} target="_blank" rel="noreferrer">
                 <IconComponent />
               </a>
             </li>
           );
         })}
       </ul>
-      <p>Follow Me</p>
     </div>
   );
 };

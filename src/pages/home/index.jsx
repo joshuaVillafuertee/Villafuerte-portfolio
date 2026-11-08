@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Typewriter from "../../components/typewriter";
@@ -6,6 +6,16 @@ import { introdata, meta } from "../../content_option";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % introdata.images.length);
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <HelmetProvider>
       <section id="home" className="home">
@@ -15,10 +25,14 @@ export const Home = () => {
           <meta name="description" content={meta.description} />
         </Helmet>
         <div className="intro_sec d-block d-lg-flex align-items-center ">
-          <div
-            className="h_bg-image order-1 order-lg-2 h-100 "
-            style={{ backgroundImage: `url(${introdata.your_img_url})` }}
-          ></div>
+          <div className="h_bg-image order-1 order-lg-2 h-100">
+            <img
+              key={activeImage}
+              src={introdata.images[activeImage]}
+              alt=""
+              className="hero-photo"
+            />
+          </div>
           <div className="text order-2 order-lg-1 h-100 d-lg-flex justify-content-center">
             <div className="align-self-center ">
               <div className="intro mx-auto">
@@ -34,6 +48,7 @@ export const Home = () => {
                       autoStart: true,
                       loop: true,
                       deleteSpeed: 10,
+                      pauseFor: 1800,
                     }}
                   />
                 </h1>
@@ -51,7 +66,6 @@ export const Home = () => {
                     <div id="button_h" className="ac_btn btn">
                       Contact Me
                       <div className="ring one"></div>
-                      <div className="ring two"></div>
                       <div className="ring three"></div>
                     </div>
                   </Link>
